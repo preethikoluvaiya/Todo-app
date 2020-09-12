@@ -5,56 +5,141 @@
         
         <title> TODO List </title>     
 
-        <!-- Bootstrap CDN -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <!-- Bootstrap CDN -->    
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
         <!--font awesome CDN -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+        
+        <!-- own css -->
         <link rel="stylesheet" href="/css/home.css">
 
     </head>
 
     <body>
-        <div id="main" class="alignment">
-            <table style="width: 100%;">
-                <tr>
-                    <td colspan="2"><p>TODO APP</p></td>
-                </tr>
-                <tr>
-                    <td  colspan="2" style="border-bottom:1px solid #dee2e6;">
-                        <label id="desc_label"><h5>TITLE</h5></label>
-                        <input type="text" name="decription" id="desc_input" placeholder="what do you need to do?">
-                    </td>
-                </tr>
-                <tr>
-                    <td  style="border:1px solid #dee2e6; width: 50%;" >
-                        <label for="category" style="display: block;" id="label-category"><h5>CHOOSE CATEGORY</h5></label>
-                        <select name="category" id="category" class="specialColor" required>
-                            <option value="Work">Work</option>
-                            <option value="School">School</option>
-                            <option value="Home">Home</option>
-                            <option value="Shopping">Shopping</option>
-                        </select>
-                    </td>
-                    <td style="border-bottom:1px solid #dee2e6;">
-                        <label id="label-date" ><h5>SHEDULE</h5></label>
-                        <input type="date" class="no-outline" id='input-datepicker' />    
-                    </td>
-                </tr>
-            </table>
-                <br>
-            <div id="add" class="text-center">
-                <form action="/add-contact"  method="POST">
-                    <button type="submit" class="btn btn-primary" id="add-btn">
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-align-center" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M8 1a.5.5 0 0 1 .5.5V6h-1V1.5A.5.5 0 0 1 8 1zm0 14a.5.5 0 0 1-.5-.5V10h1v4.5a.5.5 0 0 1-.5.5zM2 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V7z"/>
-                        </svg>
-                        <span>Add List</span> 
-                    </button>
-                    <!-- <button type="button" class="btn btn-danger">Danger</button> -->
-                </form>
+        <div class="bodydiv">
+            <main class="alignment" style="padding-top: 2px;position: relative;" >
+                <header>
+                    <div class="container-sm">
+                        <img  alt="Banner image" src="./images/banner-1093909__340.jpg"">
+                        <span  style="position: absolute;top: 26%;left: 40%;"><h2>TODO APP</h2></span>
+                    </div>
+                </header>
+            </main>
+            <form action="/add-list"  method="POST" onsubmit="successmsgFunction()">
+                <div id="main" class="alignment container-sm"  >
+                    <table style="width: 100%;">
+                        <tr>
+                            <td  colspan="2" style="border-bottom:1px solid #dee2e6;" class="col-sm">
+                                <label id="desc_label"><h5>TITLE</h5></label>
+                                <input type="text" name="description" id="desc_input" placeholder="what do you need to do?" required>
+                            </td>
+                        </tr>
+                        <tr class="row " id="category-date-row">
+                            <td  id = "category-tdsection" style="border-bottom:1px solid #dee2e6; border-right:1px solid #dee2e6" class="col-sm" >
+                                <label for="category" style="display: block;" id="label-category"><h5>CATEGORY</h5></label>
+                                <select name="category" id="category" class="specialColor" style="appearance: none;"    required>
+                                    <option value="">--Choose Category--</option>
+                                    <option value="Work">Work</option>
+                                    <option value="School">School</option>
+                                    <option value="Home">Home</option>
+                                    <option value="Shopping">Shopping</option>
+                                </select>
+                            </td>
+                            <td style="border-bottom:1px solid #dee2e6;" class="col-sm"> 
+                                    <label id="label-date" ><h5>SHEDULE</h5></label>
+                                    <input type = "text"  id = "input-datepicker" class="no-outline datepicker"
+                                    placeholder="DD/MM/YYYY" name="date" 
+                                    required/>    
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <br>
+                    <div id="add" class="text-center">
+                        <button type="submit" class="btn btn-primary btn-sm" id="add-btn">
+                            <span><i class = "fa fa-plus" style="padding-top: 3px;" ></i></span>
+                            <span> ADD LIST</span>  
+                        </button>
+                    </div>       
+                </div>
+            </form> 
+            </br>
+                                                     <!-- Category Filter Section in view list -->
+            <section id="view-section-container">
+            <% if(task_list.length == 0) { %>
+                <div><h3 class="text-center">Oops!!Nothing to display </h3></div>
+                <div><h3 class="text-center"><a href="/">Return Home and Please Add New List</a></h3></div>
+            <%}%>
+            <% if(task_list.length != 0) { %>
+                <div id = "view-section" class=" container-sm" > 
+                    <ul class="list-group list-group-horizontal-md mb-3" id="category-list">
+                        <li class="list-group-item list-group-item-secondary flex-fill styling-li"><a href="/">All</a></li>
+                        <li class="list-group-item list-group-item-secondary flex-fill styling-li"><a href="/workview-list" >Work</a></li>
+                        <li class="list-group-item list-group-item-secondary flex-fill styling-li"><a href="/schoolview-list" >School</a></li>
+                        <li class="list-group-item list-group-item-secondary flex-fill styling-li"><a href="/homeview-list" >Home</a></li>
+                        <li class="list-group-item list-group-item-secondary flex-fill styling-li"><a href="/shoppingview-list" >Shopping</a></li>
+                    </ul>  
+            
+                                                <!-- hamburger menu -->
+                <div class="topnav" style="display: none;">
+                    <a href="/" class="active"><img src="./images/home.svg"></a>
+                                    <!-- Navigation links (hidden by default) -->
+                    <div id="myLinks" style ="justify-content:space-around">
+                        <a href="/workview-list" >Work</a>
+                        <a href="/schoolview-list" >School</a>
+                        <a href="/homeview-list" >Home</a>
+                        <a href="/shoppingview-list" >Shopping</a>
+                    </div>
+                            <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
+                    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                        <i class="fa fa-bars"></i>
+                    </a>
+                </div>
+
+                                                            <!-- list display -->
+                <div id="view-section-list">
+                    <% for(let i of task_list) {%>
+                        <div class="list-group border-bottom mt-1 mb-3">
+                            <div class="d-flex justify-content-between ">
+                                <h5 class="mb-1" style="width: 40%;"><%= i.description %></h5>
+                
+                                    <% if( i.category == 'Work' ){%>
+                                        <button type="button" class="btn btn-primary width15 padding0"><span class="width15 "><%= i.category %></span></button>
+                                    <% } %>
+                                    <% if( i.category == 'School' ){%>
+                                        <button type="button" class="btn btn-success width15 padding0"><span class="width15 "><%= i.category %></span></button>
+                                    <% } %>
+                                    <% if( i.category == 'Home' ){%>
+                                        <button type="button" class="btn btn-danger width15 padding0"><span class="width15"><%= i.category %></span></button>
+                                    <% } %>
+                                    <% if( i.category == 'Shopping' ){%>
+                                        <button type="button" class="btn btn-info width15 padding0"><span class="width15"><%= i.category %></span></button>
+                                    <% } %>
+
+                                <a href="/edit-list/?id=<%=i._id %>" data-toggle="tooltip" title="Edit List"><img src="./images/edit.svg"></a>
+                                <a href="/delete-list/?id=<%= i._id %>" data-toggle="tooltip" title="Delete List"><img src="./images/delete.svg"></a>
+   
+                            </div>
+                            <div >
+                             <img src="./images/calendar.svg" >
+                                <small class="opacity"><%= i.date %></small>    
+                            </div>
+                        </div>
+                    <%}%>
+                </div>
             </div>
+            <%}%>
+            </section>
         </div>
-       <!-- script -->
-       <script type="text/javascript" src="/js/home.js"></script>
+                                                         <!-- script -->
+        <!-- jquery -->
+        <script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" ></script>
+        <script type="text/JavaScript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        <!-- bootstrap -->
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+        <!-- own script  -->
+        <script type="text/javascript" src="/js/home.js"></script>
     </body>
 </html>

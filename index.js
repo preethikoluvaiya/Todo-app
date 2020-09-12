@@ -1,8 +1,10 @@
 // acquiring express lib
 const express = require('express');
 
-//creating variable to use express
-const app = express();
+//acquiring body-parser
+const bodyparser = require('body-parser');
+
+const path = require('path');
 
 //assigning port
 const port = 8000;
@@ -13,12 +15,18 @@ const db = require('./config/mongoose');
 //accessing model
 const AddList = require('./models/addlist');
 
+//creating variable to use express
+const app = express();
+
+app.use(bodyparser.urlencoded({extended:true}));
+
 //acessing router
 app.use('/', require('./routes/index'));
 
 //set up view engine
 app.set('view engine','ejs');
 app.set('views','./views');
+
 
 
 //access static folders

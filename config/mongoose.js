@@ -2,7 +2,12 @@
 const mongoose = require('mongoose');
 
 //connecting to db - connection string
-mongoose.connect('mongodb://localhost/todoapp_db');
+mongoose.connect('mongodb://localhost/todoapp_db',{
+    useNewUrlParser: true, 
+    useCreateIndex: true, 
+    useUnifiedTopology: true, 
+    useFindAndModify: false
+}); 
 
 //acquire db connection
 const db = mongoose.connection;

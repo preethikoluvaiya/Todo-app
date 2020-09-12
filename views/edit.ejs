@@ -1,0 +1,80 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        
+        <title> Edit List </title>     
+
+        <!-- Bootstrap CDN -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <!--font awesome CDN -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/home.css">
+   
+
+    </head>
+    <body>
+        <div class="bodydiv">
+                                        <!-- Banner Section -->
+            <main class="alignment" style="padding-top: 2px;position: relative;" >
+                <header>
+                    <img  alt="Banner image" src="../images/banner-1093909__340.jpg"">
+                    <span  style="position: absolute;top: 26%;left: 40%;"><h2>TODO APP</h2></span>
+                </header>
+            </main>
+        
+                                                <!-- Form Main Section -->
+            <form action="/update-list" method="POST" id="formElem">
+                <div style="margin-bottom: 3%;">
+                    <div class="flex">  
+                        <input type="hidden" value="<%=task_list_id %>" id="description-id" name="id" class = "textStyle">
+                    </div>
+                    <div class="flex">
+                            <label>Description</label>
+                            <input type="text" value="<%=task_list_Description %>" class = "textStyle" id="description-edit" name="description">
+                    </div>
+                    <div class="flex">
+                            <label>Category</label>
+                            <input type="text" value="<%=task_list_Category %>" class = "textStyle" id="category-edit"  name="category">
+                    </div>
+                    <div class="flex">
+                            <label>Date</label>
+                            <input type="text" value="<%=task_list_Date %>" class = "textStyle" id="date-edit"  name="date">
+                    </div>
+                </div>
+                <div data-role="content" >
+                    <div class="flex">
+                        <h4 style="padding-left: 2px;"> Todo's</h4>
+                        <i class="fa fa-plus-circle" id="taskBtn" data-toggle="tooltip" title="Add List"> <span style="padding-right:10px">Add List</span></i>
+                    </div>
+                    </br>                     
+                    <div id="listItemContainer" >
+                        <ul class="list-group" id="taskListSection" style="display: flex;" >
+                            <% for(let i=0;i<task_list_list.length;i++){ %>
+                                <% if( task_list_list[i]  != '' ) { %>
+                                    <li class="list-group-item" style = "display: inline-flex;"  > 
+                                        <input type = "radio" checked>&nbsp;
+                                        <input id = "listinputCheckbox" type = "text" value = "<%=task_list_list[i] %>" name = "list">    
+                                        <i class="fas fa-minus-circle deletetask"></i>
+                                    </li>
+                                <% } %>
+                            <%}%> 
+                        </ul>
+                    </div>
+                    
+                    <div style="height: 30px;" id="tagArray">
+                    </div>
+                                                <!-- Submit Section -->
+                    <div id="add" class="text-center">
+                        <button type="submit" class="btn btn-danger btn-sm" id="add-btn" onclick="alertFn()">UPDATE & SAVE</button> 
+                    </div>           
+                </div>
+            </form>
+        </div>    
+                                                        <!-- Script Section -->
+        <script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js" ></script>
+        <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+        <script type="text/javascript" src="/js/home.js"></script>
+            
+    </body>
+</html>

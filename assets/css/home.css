@@ -1,16 +1,35 @@
-.alignment {
+body{
+    max-height: 400px;
+    background-image: radial-gradient(rgba(255, 255, 0, 0.055),#0400ffe0);
+}                      
+                               
+                                                    /* Add Tasklist section */
+main img{
+    width: 100%;
+    height: 80px;
+}        
+
+.bodydiv{
+    width:50%;
     margin:auto;
-    width: 50%;
-    height: auto;
-    border:1px solid black;
 }
+
+
 #main p{
     text-align: center;
     font-size: 1.5em;
     margin-top: 5px;
     font-family: -webkit-pictograph;
-    color: tomato;
+    color: rgb(57, 147, 231);
 }
+#main select{
+    background-color: #0400ffe0;
+    background: rgba(255, 255, 0, 0.055);
+}
+#main select option{
+    background:lightgray;
+} 
+
 #desc_label{
     margin-bottom:0;
 }
@@ -26,9 +45,9 @@ input[type="text"]{
     padding-left:10px;
     width: -webkit-fill-available;
     background-color: inherit;
-    color:#7726b1;
+    color:#f44336;
 }
-                        /* Category section */
+                                            /* Category section */
 
 #label-category{
     padding-left:10px;
@@ -39,10 +58,10 @@ input[type="text"]{
     outline: none;
     border:0;
 }
-option{
+/* option{
     background-color: lightcoral;
-}
-                            /* Date Section */
+} */
+                                                /* Date Section */
 #label-date{
     padding-top:1px;
     padding-left: 10px;;
@@ -52,19 +71,127 @@ option{
 
 #input-datepicker{
     padding:0px;
-    width: -webkit-fill-available;
+    width: 100%;
     line-height: 25px;
     border:0;
     padding-left: 10px;
     background-color:inherit;
 }
-                        /* Add Button */
-                       
+#category-date-row ,.row{
+   margin-right: 0;
+   margin-left: 0;
+}
+                                /* VIEW LIST SECTION DIFFERENT CATEGORY FILTER  */
+
+.btn-secondary {
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #020202;
+    margin-bottom: 10px;
+    width: -webkit-fill-available;   
+}
+.btn-group{
+    width: -webkit-fill-available;
+}
+#category-list a, a:hover, a:focus, a:active {
+    text-decoration: none;
+    color: blue;
+    font-family: cursive;
+    font-weight: 500;
+}
+#view-section-list{
+    max-height: 350px;
+    overflow-y:scroll;
+}
+#view-section-list::-webkit-scrollbar {
+    display: none;
+}
+
+    
+                                         /* view list section */
+#view-section-list .btn{
+    font-weight: 100;
+}
+
+/* hamburger */
+/* Style the navigation menu */
+.topnav {
+    overflow: hidden;
+    background-color: #333;
+    position: relative;
+    margin-bottom: 10px;
+    height: 35px;
+  }
+  
+  /* Hide the links inside the navigation menu (except for logo/home) */
+  .topnav #myLinks {
+    display: none;
+  }
+  
+  /* Style navigation menu links */
+  .topnav a {
+    float: left;
+    color: white;
+    padding: 8px 8px;
+    text-decoration: none;
+    font-size: 15px;
+  }
+  
+  /* Style the hamburger menu */
+  .topnav a.icon {
+    float: right;
+  }
+  
+  /* Add a grey background color on mouse-over */
+  .topnav a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  .topnav a.icon:hover{
+      background-color: inherit;
+      color: ivory;
+  }
+  /* Style the active link (or home/logo) */
+  .active {
+    background-color: #4CAF50;
+    color: white;
+  }
 
 
+                                    /* EDIT TASK LIST PAGE */
 
-
-                        /* common classes */
+#description-id{
+    padding: 10px;
+}
+.flex label{
+    padding: 1%;
+    width: 25%;
+    font-family: cursive;
+}
+#taskInputText{
+    height: 30px;
+    margin:10px;
+}
+#taskBtn{
+    margin-top: 10px;
+}
+#listinputCheckbox{
+    height: 19px;
+    font-size: 16px;
+    color:#181819;
+}
+#listItemContainer{
+    max-height: 200px;
+    overflow-y: scroll;
+}
+#listItemContainer::-webkit-scrollbar{
+    display: none;
+}
+#listItemContainer{
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+                                                /* common classes */
 
 .no-outline:focus {
     outline: none;
@@ -77,5 +204,94 @@ option{
     font-size: 10px;
   }
 .specialColor{
-    color:orange;
+    color:antiquewhite;
 }
+.width65{
+    width: 50px;
+}
+.fas, .fa{
+    float: right;
+}
+.flex{
+    display: flex;
+    justify-content: space-between;
+}
+.textStyle{
+    font-family: none;
+    font-size: larger;
+    color: deeppink !important;
+}
+.styling-li{
+    text-align: center;
+    height: 35px;
+    padding: 2px;
+}
+.opacity{
+    opacity: 0.6;
+}
+.width15{
+    width: 90px;
+    height: 30px;
+}
+.padding0{
+    padding: 0;
+}
+
+
+
+
+@media (max-width: 576px) { 
+    .bodydiv{
+        width :100%;
+    }
+    #view-section-list h5{
+        font-size: 15px;
+    }
+    #category-list{
+        display: none;
+    }
+    .topnav{
+        display: block !important;
+    }
+    #category-tdsection{
+        border-right:inherit !important;
+    }
+ }
+
+/* // Medium devices (tablets, 768px and up) */
+@media (max-width: 768px) { 
+    .bodydiv{
+        width :100%;
+    }
+    #view-section-list h5{
+        font-size: 15px;
+    }
+    #category-list{
+        display: none;
+    }
+    .topnav{
+        display: block !important;
+    }
+    #category-tdsection{
+        border-right:inherit !important;
+    }
+}
+
+/* // Large devices (desktops, 992px and up)
+@media (min-width: 992px) { 
+    .bodydiv{
+        width :100%;
+    }
+    #view-section-list h5{
+        font-size: 15px;
+    }
+    #category-list{
+        display: none;
+    }
+    #category-tdsection{
+        border-right:inherit !important;
+    }
+ }
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) { ... } */

@@ -1,9 +1,9 @@
 //require mongoose library
 const mongoose = require('mongoose');
 
-//create schema
-const addList = new mongoose.Schema({
-    title:{
+
+const addListSchema = new mongoose.Schema({
+    description:{
         type: String,
         required : true
     },
@@ -12,12 +12,16 @@ const addList = new mongoose.Schema({
         required : true
     },
     date:{
-        type : Date,
-        default: Date.now,
+        type : String,
         required : true
+    },
+    list:{
+        type:[]
     }
 });
 
+
+
 //export Model
-const AddList = mongoose.model('AddList', addList);
+const AddList = mongoose.model('AddList', addListSchema);
 module.exports = AddList;
